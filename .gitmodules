@@ -1,0 +1,3 @@
+[submodule "emlabcpp"]
+	path = emlabcpp
+	url = https://github.com/koniarik/emlabcpp
