@@ -5,8 +5,11 @@ FIND_FILTER = -not \( -path ./build -prune \) -not \( -path ./emlabcpp -prune \)
 
 BUILD_ARGS = -GNinja
 
+02: build
+	build/02_bin
+
 01: build
-	build/01 01/input
+	build/01_bin
 
 build:
 	cmake -Bbuild ${BUILD_ARGS} 
