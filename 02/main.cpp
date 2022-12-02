@@ -1,5 +1,6 @@
 #include <emlabcpp/algorithm.h>
 
+#include <cassert>
 #include <charconv>
 #include <fstream>
 #include <initializer_list>
@@ -17,14 +18,13 @@ enum moves {
   scissors = 2,
 };
 
+// a = (b + e)%3
+// E k : a = k*3 + b + e;
+// E k : e = a - k*3 - b;
+// e = (a - b)%3;
 int32_t play(moves a, moves b) {
-  if (a == b) {
-    return 0;
-  }
-  if (a == (b + 1) % 3) {
-    return 1;
-  }
-  return -1;
+  int32_t e = a - b;
+  return ((e + 1 + 3) % 3) - 1; // modulo in -1..1 range 
 }
 
 int32_t reward(int32_t result) { return result * 3 + 3; }
@@ -58,5 +58,6 @@ int main() {
     std::size_t round_score = me + 1 + reward(play(me, opponent));
     score += round_score;
   }
+  std::cout << "known score: " << 13187 << std::endl;
   std::cout << "score: " << score << std::endl;
 }
